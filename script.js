@@ -180,7 +180,6 @@ function renderPassengers() {
 
     row.appendChild(seatCell);
     row.appendChild(classCell);
-    row.appendChild(nameCell);
     tbody.appendChild(row);
   });
 }
