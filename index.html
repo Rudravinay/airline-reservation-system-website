@@ -3,29 +3,88 @@
 <head>
   <meta charset="UTF-8" />
   <title>Airline Reservation System</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <header>
-    <h1>Airline Reservation System</h1>
-    <nav>
+  <div class="bg-gradient"></div>
+
+  <header class="topbar">
+    <div class="logo-area">
+      <div class="logo-circle">✈</div>
+      <div>
+        <h1>Airline Reservation System</h1>
+        <p class="subtitle">Modern seat booking simulation</p>
+      </div>
+    </div>
+
+    <nav class="nav-links">
       <a href="#layout">Seat Layout</a>
-      <a href="#passengers">Passenger List</a>
-      <a href="#about">About Project</a>
+      <a href="#passengers">Passengers</a>
+      <a href="#about">About</a>
     </nav>
+
+    <div class="owner-tag">
+      <span>By J. Rudra Vinay</span>
+      <span class="roll">AP24110010789</span>
+    </div>
   </header>
 
-  <main>
+  <main class="container">
+    <!-- HERO SECTION -->
     <section class="hero">
-      <h2>Book Your Flight Seat</h2>
-      <p>
-        Click on a seat to book or cancel. Green = Available, Red = Booked.
-        Classes: First, Business, Economy.
-      </p>
+      <div class="hero-text">
+        <h2>Plan your flight in a few clicks.</h2>
+        <p>
+          Interactive demo of an Airline Reservation System. Click on any
+          <strong>green seat</strong> to book, and click again on
+          <strong>red seats</strong> to cancel.
+        </p>
+
+        <div class="hero-highlights">
+          <div class="highlight">
+            <span class="highlight-label">Total seats</span>
+            <span class="highlight-value">30</span>
+          </div>
+          <div class="highlight">
+            <span class="highlight-label">Seat classes</span>
+            <span class="highlight-value">First / Business / Economy</span>
+          </div>
+          <div class="highlight">
+            <span class="highlight-label">Tech</span>
+            <span class="highlight-value">C++ OOPS + Web UI</span>
+          </div>
+        </div>
+
+        <a href="#layout" class="primary-btn">
+          Start Booking
+        </a>
+      </div>
+
+      <div class="hero-visual">
+        <div class="plane-card">
+          <div class="plane-icon">✈</div>
+          <div class="plane-info">
+            <span class="label">Demo Flight</span>
+            <span class="route">HYD → DEL</span>
+            <span class="time">Today · 10:00 AM</span>
+          </div>
+        </div>
+
+        <div class="pill-row">
+          <span class="pill first-pill">First Class Comfort</span>
+          <span class="pill business-pill">Business Flex</span>
+          <span class="pill economy-pill">Economy Saver</span>
+        </div>
+      </div>
     </section>
 
+    <!-- SEAT LAYOUT SECTION -->
     <section id="layout" class="card">
-      <h2>Seat Layout</h2>
+      <div class="card-header">
+        <h3>Seat Layout</h3>
+        <p>Click a seat to book or cancel. Hover to view class.</p>
+      </div>
 
       <div class="legend">
         <span class="legend-item">
@@ -47,62 +106,97 @@
 
       <div id="seat-container">
         <div class="side">
-          <h3>Left (L1–L15)</h3>
+          <h4>Left Wing (L1–L15)</h4>
           <div id="left-seats" class="seat-grid"></div>
         </div>
+
         <div class="plane-path">
-          <span>✈</span>
+          <div class="path-line"></div>
+          <div class="path-plane">✈</div>
         </div>
+
         <div class="side">
-          <h3>Right (R1–R15)</h3>
+          <h4>Right Wing (R1–R15)</h4>
           <div id="right-seats" class="seat-grid"></div>
         </div>
       </div>
     </section>
 
+    <!-- PASSENGER LIST SECTION -->
     <section id="passengers" class="card">
-      <h2>Passenger List</h2>
-      <table id="passenger-table">
-        <thead>
-          <tr>
-            <th>Seat</th>
-            <th>Class</th>
-            <th>Passenger Name</th>
-          </tr>
-        </thead>
-        <tbody>
-          <!-- Filled by JS -->
-        </tbody>
-      </table>
-      <p class="hint">Click on any booked seat to cancel it.</p>
+      <div class="card-header">
+        <h3>Passenger List</h3>
+        <p>Shows all currently booked seats.</p>
+      </div>
+
+      <div class="table-wrapper">
+        <table id="passenger-table">
+          <thead>
+            <tr>
+              <th>Seat</th>
+              <th>Class</th>
+              <th>Passenger Name</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Filled by JS -->
+          </tbody>
+        </table>
+      </div>
+
+      <p class="hint">Tip: Click a booked seat to cancel the reservation.</p>
     </section>
 
+    <!-- ABOUT SECTION -->
     <section id="about" class="card">
-      <h2>About This Project</h2>
-      <p>
-        This website is a front-end simulation of an
-        <strong>Airline Reservation System</strong> originally implemented in
-        <strong>C++</strong> using Object-Oriented Programming.
-      </p>
-      <ul>
-        <li>30 seats (L1–L15 and R1–R15)</li>
-        <li>Classes:
-          <strong>First Class (1–5)</strong>,
-          <strong>Business (6–10)</strong>,
-          <strong>Economy (11–15)</strong>
-        </li>
-        <li>Book / cancel seats and view passenger list</li>
-      </ul>
-      <p>
-        The original C++ program uses:
-        <strong>classes, encapsulation and abstraction</strong> to manage the
-        reservation system in a console application.
-      </p>
+      <div class="card-header">
+        <h3>About This Project</h3>
+      </div>
+
+      <div class="about-grid">
+        <div>
+          <p>
+            This web UI is a modern front-end for an
+            <strong>Airline Reservation System</strong> originally implemented
+            in <strong>C++</strong> using Object-Oriented Programming concepts.
+          </p>
+          <p>
+            The original console application uses classes like
+            <code>Seat</code> and <code>AirlineReservationSystem</code> to
+            manage bookings, cancellations, and passenger details.
+          </p>
+        </div>
+
+        <div>
+          <h4>Key Features</h4>
+          <ul>
+            <li>30 seats: L1–L15 and R1–R15</li>
+            <li>Seat categories: First, Business, Economy</li>
+            <li>Interactive booking and cancellation</li>
+            <li>Live passenger list table</li>
+          </ul>
+        </div>
+
+        <div>
+          <h4>OOPS Concepts Used</h4>
+          <ul>
+            <li>Classes & Objects</li>
+            <li>Encapsulation (private data)</li>
+            <li>Abstraction of booking logic</li>
+          </ul>
+          <p class="small-note">
+            This UI is built with pure <strong>HTML, CSS, and JavaScript</strong>
+            and hosted on <strong>GitHub Pages</strong>.
+          </p>
+        </div>
+      </div>
     </section>
   </main>
 
-  <footer>
-    <p>&copy; 2025 Airline Reservation System – GitHub Pages Demo</p>
+  <footer class="footer">
+    <span>© 2025 Airline Reservation System</span>
+    <span class="dot">•</span>
+    <span>Project by J. Rudra Vinay (AP24110010789)</span>
   </footer>
 
   <script src="script.js"></script>
