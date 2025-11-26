@@ -170,19 +170,23 @@ function renderPassengers() {
 
   passengers.forEach((seat) => {
     const row = document.createElement("tr");
+
     const seatCell = document.createElement("td");
     const classCell = document.createElement("td");
     const nameCell = document.createElement("td");
 
     seatCell.textContent = seat.label;
     classCell.textContent = seat.getClassName();
-    nameCell.textContent = seat.passenger;
+    nameCell.textContent = seat.passenger; 
 
     row.appendChild(seatCell);
     row.appendChild(classCell);
+    row.appendChild(nameCell);                
+
     tbody.appendChild(row);
   });
 }
+
 
 /* ----- Seat click handler (booking / cancelling) ----- */
 
@@ -216,3 +220,4 @@ document.addEventListener("DOMContentLoaded", () => {
   renderSeats();
   renderPassengers();
 });
+
