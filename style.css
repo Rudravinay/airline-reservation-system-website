@@ -594,3 +594,117 @@ code {
     grid-template-columns: minmax(0, 1fr);
   }
 }
+
+/* ---------- EXTRA ANIMATIONS & TOAST ---------- */
+
+/* Fade-up for sections */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero {
+  animation: fadeUp 0.7s ease-out;
+}
+
+.card {
+  animation: fadeUp 0.7s ease-out;
+}
+
+/* Plane floating animation in middle column */
+@keyframes floatPlane {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-10px);
+  }
+}
+
+/* Override/add animation for path-plane */
+.plane-path .path-plane {
+  animation: floatPlane 2.5s ease-in-out infinite alternate;
+}
+
+/* Soft glow pulse for main flight card */
+@keyframes glowPulse {
+  0% {
+    box-shadow: 0 20px 45px rgba(15, 23, 42, 0.8);
+    border-color: rgba(148, 163, 184, 0.3);
+  }
+  50% {
+    box-shadow: 0 20px 55px rgba(56, 189, 248, 0.5);
+    border-color: rgba(56, 189, 248, 0.55);
+  }
+  100% {
+    box-shadow: 0 20px 45px rgba(15, 23, 42, 0.8);
+    border-color: rgba(148, 163, 184, 0.3);
+  }
+}
+
+.plane-card {
+  animation: glowPulse 3.4s ease-in-out infinite;
+}
+
+/* Slight pop-in for seats when page loads */
+@keyframes seatPop {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.seat {
+  animation: seatPop 0.4s ease-out;
+}
+
+/* Toast popup at bottom */
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 24px;
+  transform: translateX(-50%) translateY(120%);
+  padding: 10px 16px;
+  border-radius: 999px;
+  background: rgba(15, 23, 42, 0.95);
+  border: 1px solid rgba(148, 163, 184, 0.6);
+  color: #e5e7eb;
+  font-size: 13px;
+  box-shadow: 0 16px 30px rgba(0, 0, 0, 0.65);
+  opacity: 0;
+  pointer-events: none;
+  transition: transform 0.25s ease, opacity 0.25s ease, background 0.2s ease,
+    border-color 0.2s ease;
+  z-index: 40;
+}
+
+.toast.show {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
+}
+
+/* Colors based on type */
+.toast.success {
+  border-color: #22c55e;
+  background: rgba(6, 78, 59, 0.95);
+}
+
+.toast.error {
+  border-color: #f97373;
+  background: rgba(127, 29, 29, 0.96);
+}
+
+.toast.info {
+  border-color: #38bdf8;
+  background: rgba(15, 23, 42, 0.96);
+}
