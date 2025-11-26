@@ -41,29 +41,34 @@ class AirlineReservationSystem {
   bookSeat(label, passengerName) {
     const seat = this.getSeat(label);
     if (!seat) {
-      alert("Invalid seat label.");
-      return;
+      showToast("Invalid seat label.", "error");
+      return false;
     }
     if (seat.booked) {
-      alert("Seat already booked.");
-      return;
+      showToast("Seat is already booked.", "error");
+      return false;
     }
     seat.booked = true;
     seat.passenger = passengerName;
+    showToast(`Seat ${label} booked for ${passengerName}.`, "success");
+    return true;
   }
 
   cancelSeat(label) {
     const seat = this.getSeat(label);
     if (!seat) {
-      alert("Invalid seat label.");
-      return;
+      showToast("Invalid seat label.", "error");
+      return false;
     }
     if (!seat.booked) {
-      alert("Seat is not booked.");
-      return;
+      showToast("Seat is not booked.", "error");
+      return false;
     }
+    const name = seat.passenger;
     seat.booked = false;
     seat.passenger = "";
+    showToast(`Booking cancelled for ${label} (${name}).`, "info");
+    return true;
   }
 
   getPassengers() {
@@ -72,6 +77,37 @@ class AirlineReservationSystem {
 }
 
 const system = new AirlineReservationSystem();
+
+/* ----- Toast popup helper ----- */
+
+let toastTimeoutId = null;
+
+function showToast(message, type = "info") {
+  const toast = document.getElementById("toast");
+  const msgSpan = document.getElementById("toast-message");
+  if (!toast || !msgSpan) return;
+
+  msgSpan.textContent = message;
+
+  // Reset classes
+  toast.classList.remove("success", "error", "info", "show");
+  toast.classList.add(type);
+
+  // Trigger visible state
+  requestAnimationFrame(() => {
+    toast.classList.add("show");
+  });
+
+  if (toastTimeoutId) {
+    clearTimeout(toastTimeoutId);
+  }
+
+  toastTimeoutId = setTimeout(() => {
+    toast.classList.remove("show");
+  }, 2200);
+}
+
+/* ----- Rendering seats & passengers ----- */
 
 function createSeatElement(seat) {
   const div = document.createElement("div");
@@ -87,10 +123,11 @@ function createSeatElement(seat) {
 function renderSeats() {
   const leftContainer = document.getElementById("left-seats");
   const rightContainer = document.getElementById("right-seats");
+  if (!leftContainer || !rightContainer) return;
+
   leftContainer.innerHTML = "";
   rightContainer.innerHTML = "";
 
-  // Show L15 → L1 like original layout or simple L1–L15 in rows
   const leftSeats = system.seats.filter((s) => s.label.startsWith("L"));
   const rightSeats = system.seats.filter((s) => s.label.startsWith("R"));
 
@@ -113,6 +150,8 @@ function renderSeats() {
 
 function renderPassengers() {
   const tbody = document.querySelector("#passenger-table tbody");
+  if (!tbody) return;
+
   tbody.innerHTML = "";
 
   const passengers = system.getPassengers();
@@ -123,7 +162,7 @@ function renderPassengers() {
     cell.colSpan = 3;
     cell.textContent = "No bookings yet.";
     cell.style.fontStyle = "italic";
-    cell.style.color = "#6b7280";
+    cell.style.color = "#9ca3af";
     row.appendChild(cell);
     tbody.appendChild(row);
     return;
@@ -146,13 +185,18 @@ function renderPassengers() {
   });
 }
 
+/* ----- Seat click handler (booking / cancelling) ----- */
+
 function onSeatClick(label) {
   const seat = system.getSeat(label);
   if (!seat) return;
 
   if (!seat.booked) {
     const name = prompt(`Enter passenger name for seat ${label}:`);
-    if (!name) return;
+    if (!name || !name.trim()) {
+      showToast("Booking cancelled: no name entered.", "info");
+      return;
+    }
     system.bookSeat(label, name.trim());
   } else {
     const confirmCancel = confirm(
@@ -167,7 +211,8 @@ function onSeatClick(label) {
   renderPassengers();
 }
 
-// Initial render
+/* ----- Initial render ----- */
+
 document.addEventListener("DOMContentLoaded", () => {
   renderSeats();
   renderPassengers();
