@@ -53,5 +53,3 @@ This project was created as a beginner frontend learning project to understand w
 ## 👨‍💻 Author
 
 Rudra Vinay
-
----
