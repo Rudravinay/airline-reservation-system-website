@@ -27,12 +27,9 @@ This project demonstrates basic frontend development concepts such as page struc
 ## 📂 Project Structure
 
 airline-reservation-system-website/
-
 │
 ├── index.html
-
 ├── style.css
-
 └── script.js
 
 ---
@@ -56,3 +53,5 @@ This project was created as a beginner frontend learning project to understand w
 ## 👨‍💻 Author
 
 Rudra Vinay
+
+---
